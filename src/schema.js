@@ -136,6 +136,7 @@ const getObjectTypeContent = (schema) => {
 
     return {
       $$raw: property,
+      title: property.title,
       description: _.compact([
         property.description ||
           _.compact(_.map(property[getComplexType(property)], "description"))[0] ||
