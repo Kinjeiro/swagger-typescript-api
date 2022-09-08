@@ -77,7 +77,7 @@ export class HttpClient<SecurityDataType = unknown> {
     }: FullRequestParams): Promise<AxiosResponse<T>> => {
         const secureParams = ((typeof secure === 'boolean' ? secure : this.secure) && this.securityWorker && (await this.securityWorker(this.securityData))) || {};
         const requestParams = this.mergeRequestParams(params, secureParams);
-        const responseFormat = (format && this.format) || void 0;
+        const responseFormat = format || this.format || void 0;
 
         return this.instance.request({
             ...requestParams,
