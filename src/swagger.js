@@ -2,6 +2,7 @@ const _ = require("lodash");
 const yaml = require("js-yaml");
 const axios = require("axios");
 const converter = require("swagger2openapi");
+const curlirize = require("axios-curlirize");
 const https = require("https");
 const { addToConfig, config } = require("./config");
 const { pathIsExist, getFileContent } = require("./files");
@@ -16,6 +17,9 @@ const parseSwaggerFile = (file) => {
     return yaml.load(file);
   }
 };
+
+// log request
+curlirize(axios)
 
 const getSwaggerFile = (pathToSwagger, urlToSwagger, disableStrictSSL, authToken) =>
   new Promise((resolve) => {
