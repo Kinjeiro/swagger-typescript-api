@@ -77,6 +77,10 @@ interface GenerateApiParams {
    */
   disableStrictSSL?: boolean;
   /**
+   * axios headers json for swagger url
+   */
+  headersJson?: string;
+  /**
    * generate separated files for http client, data contracts, and routes (default: false)
    */
   modular?: boolean;
@@ -275,7 +279,7 @@ export interface GenerateApiConfiguration {
     moduleNameIndex: number;
     moduleNameFirstTag: boolean;
     disableStrictSSL: boolean;
-    headers?: string;
+    headersJson?: string;
     extractRequestParams: boolean;
     fileNames: {
       dataContracts: string;
