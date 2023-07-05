@@ -54,6 +54,7 @@ Options:
   --module-name-first-tag       splits routes based on the first tag
   --modular                     generate separated files for http client, data contracts, and routes (default: false)
   --disableStrictSSL            disabled strict SSL (default: false)
+  --authToken                   auth bearer token to swagger url
   --clean-output                clean output folder before generate api. WARNING: May cause data loss (default: false)
   --axios                       generate axios http client (default: false)
   --single-http-client          Ability to send HttpClient instance to Api constructor (default: false)

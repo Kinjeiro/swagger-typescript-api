@@ -17,7 +17,7 @@ const parseSwaggerFile = (file) => {
   }
 };
 
-const getSwaggerFile = (pathToSwagger, urlToSwagger, disableStrictSSL) =>
+const getSwaggerFile = (pathToSwagger, urlToSwagger, disableStrictSSL, authToken) =>
   new Promise((resolve) => {
     if (pathIsExist(pathToSwagger)) {
       log(`try to get swagger by path "${pathToSwagger}"`);
@@ -30,12 +30,22 @@ const getSwaggerFile = (pathToSwagger, urlToSwagger, disableStrictSSL) =>
           rejectUnauthorized: false,
         });
       }
-      axios.get(urlToSwagger, { httpsAgent: agent }).then((res) => resolve(res.data));
+      axios.get(
+        urlToSwagger,
+        {
+          httpsAgent: agent,
+          ...(authToken ? {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          } : undefined),
+        },
+      ).then((res) => resolve(res.data));
     }
   });
 
-const getSwaggerObject = (pathToSwagger, urlToSwagger, disableStrictSSL) =>
-  getSwaggerFile(pathToSwagger, urlToSwagger, disableStrictSSL).then((file) =>
+const getSwaggerObject = (pathToSwagger, urlToSwagger, disableStrictSSL, authToken) =>
+  getSwaggerFile(pathToSwagger, urlToSwagger, disableStrictSSL, authToken).then((file) =>
     convertSwaggerObject(parseSwaggerFile(file)),
   );
 
