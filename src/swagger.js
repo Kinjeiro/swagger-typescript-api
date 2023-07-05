@@ -21,7 +21,7 @@ const parseSwaggerFile = (file) => {
 // log request
 curlirize(axios)
 
-const getSwaggerFile = (pathToSwagger, urlToSwagger, disableStrictSSL, authToken) =>
+const getSwaggerFile = (pathToSwagger, urlToSwagger, disableStrictSSL, headers) =>
   new Promise((resolve) => {
     if (pathIsExist(pathToSwagger)) {
       log(`try to get swagger by path "${pathToSwagger}"`);
@@ -38,18 +38,16 @@ const getSwaggerFile = (pathToSwagger, urlToSwagger, disableStrictSSL, authToken
         urlToSwagger,
         {
           httpsAgent: agent,
-          ...(authToken ? {
-            headers: {
-              Authorization: `Bearer ${authToken}`,
-            },
+          ...(headers ? {
+            headers: JSON.parse(`{${headers}}`),
           } : undefined),
         },
       ).then((res) => resolve(res.data));
     }
   });
 
-const getSwaggerObject = (pathToSwagger, urlToSwagger, disableStrictSSL, authToken) =>
-  getSwaggerFile(pathToSwagger, urlToSwagger, disableStrictSSL, authToken).then((file) =>
+const getSwaggerObject = (pathToSwagger, urlToSwagger, disableStrictSSL, headers) =>
+  getSwaggerFile(pathToSwagger, urlToSwagger, disableStrictSSL, headers).then((file) =>
     convertSwaggerObject(parseSwaggerFile(file)),
   );
 

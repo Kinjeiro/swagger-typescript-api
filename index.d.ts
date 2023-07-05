@@ -275,7 +275,7 @@ export interface GenerateApiConfiguration {
     moduleNameIndex: number;
     moduleNameFirstTag: boolean;
     disableStrictSSL: boolean;
-    authToken?: string;
+    headers?: string;
     extractRequestParams: boolean;
     fileNames: {
       dataContracts: string;

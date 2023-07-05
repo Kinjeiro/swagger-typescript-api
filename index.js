@@ -63,7 +63,7 @@ program
   )
   .option("--module-name-first-tag", "splits routes based on the first tag", false)
   .option("--disableStrictSSL", "disabled strict SSL", false)
-  .option("--authToken", "auth bearer token for swagger url", undefined)
+  .option("--headers", "axios headers for swagger url", undefined)
   .option("--axios", "generate axios http client", false)
   .option("--single-http-client", "Ability to send HttpClient instance to Api constructor", false)
   .option("--silent", "Output only errors to console", false)
@@ -95,7 +95,7 @@ const {
   extractRequestParams,
   enumNamesAsValues,
   disableStrictSSL,
-  authToken,
+  headers,
   cleanOutput,
   defaultResponse,
   singleHttpClient,
@@ -125,7 +125,7 @@ generateApi({
   moduleNameIndex: +(moduleNameIndex || 0),
   moduleNameFirstTag: moduleNameFirstTag,
   disableStrictSSL: !!disableStrictSSL,
-  authToken,
+  headers,
   singleHttpClient: !!singleHttpClient,
   cleanOutput: !!cleanOutput,
   silent: !!silent,
