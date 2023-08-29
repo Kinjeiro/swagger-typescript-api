@@ -35,6 +35,11 @@ const getSwaggerFile = (pathToSwagger, urlToSwagger, disableStrictSSL, headersJs
         });
       }
 
+      if (headersJson) {
+        console.log('AXIOS headers:\n', {
+          headers: JSON.parse(headersJson),
+        })
+      }
       axios.get(
         urlToSwagger,
         {
